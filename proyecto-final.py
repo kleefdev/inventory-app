@@ -101,15 +101,18 @@ def reporte_bajo_stock():
     limite = validar_entero("Ingrese el límite de bajo stock: ")
     cursor.execute("SELECT * FROM productos WHERE cantidad <= ?", (limite,))
     productos = cursor.fetchall()
-
     if productos:
         tabla = tabulate(productos, headers=["ID", "Nombre", "Cantidad", "Precio ($)"], tablefmt="fancy_grid")
         print(tabla)
     else:
         print(Fore.CYAN + "No hay Productos con bajo stock.")
 
+def enter_para_continuar():
+    input(Back.CYAN + "Enter para continuar....")
+
 # Menú principal
 while True:
+    print(Style.BRIGHT + Fore.GREEN + Back.MAGENTA + "\nBIENVENIDX A KLEEFDEV INVENTORY APP" + Style.RESET_ALL + "\n")
     print(titulos['menu'])
     opcion = input(Back.GREEN + "\nIngrese una Opción: ")
 
@@ -131,3 +134,5 @@ while True:
         break
     else:
         print(Fore.RED + "Opción incorrecta, intente de nuevo.")
+    if opcion != "0":
+        enter_para_continuar()
